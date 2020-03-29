@@ -19,13 +19,16 @@ variable "VPCNamesMap" {
   }
 }
 
+output "VPC-ID" {
+  value = "${aws_vpc.myFirstVpc.id}"
+}
 
 resource "aws_vpc" "myFirstVpc" {
     cidr_block= "10.0.0.0/16"
 
     tags = {
         Region = "United-States"
-        
+
         NameString = "${var.VPCName}"
         NameList = "${var.VPCNamesList[0]}"
         NameMap = "${var.VPCNamesMap.Name1}"
