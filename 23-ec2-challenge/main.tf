@@ -4,7 +4,7 @@ variable "EC2_AMI" {
 }
 
 resource "aws_instance" "Database" {
-  ami = "${var.EC2_AMI}"
+  ami = var.EC2_AMI
   instance_type = "t2.micro"
 
   tags = {
@@ -13,10 +13,10 @@ resource "aws_instance" "Database" {
 }
 
 resource "aws_instance" "Web" {
-  ami = "${var.EC2_AMI}"
+  ami = var.EC2_AMI
   instance_type = "t2.micro"
-  security_groups = ["${aws_security_group.web_security_group.name}"]
-  user_data = "${file("server-script.sh")}"
+  security_groups = [aws_security_group.web_security_group.name]
+  user_data = file("server-script.sh")
 
   tags = {
     Name = "Web"
@@ -58,13 +58,13 @@ resource "aws_security_group" "web_security_group" {
 }
 
 resource "aws_eip" "web_ip" {
-  instance = "${aws_instance.Web.id}"
+  instance = aws_instance.Web.id
 }
 
 output "web_public_ip" {
-  value = "${aws_eip.web_ip.public_ip}"
+  value = aws_eip.web_ip.public_ip
 }
 
 output "db_private_ip" {
-  value = "${aws_instance.Database.private_ip}"
+  value = aws_instance.Database.private_ip
 }

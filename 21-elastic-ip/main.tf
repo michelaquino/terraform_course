@@ -4,7 +4,7 @@ variable "EC2_AMI" {
 }
 
 resource "aws_instance" "ec2" {
-  ami = "${var.EC2_AMI}"
+  ami = var.EC2_AMI
   instance_type = "t2.micro"
 
   tags = {
@@ -13,9 +13,9 @@ resource "aws_instance" "ec2" {
 }
 
 resource "aws_eip" "elastic_ip" {
-  instance = "${aws_instance.ec2.id}"
+  instance = aws_instance.ec2.id
 }
 
 output "public_ip" {
-  value = "${aws_eip.elastic_ip.public_ip}"
+  value = aws_eip.elastic_ip.public_ip
 }

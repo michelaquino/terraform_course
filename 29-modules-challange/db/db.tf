@@ -9,5 +9,5 @@ resource "aws_instance" "Database" {
 }
 
 output "db_private_ip" {
-  value = "${aws_instance.Database.private_ip}"
+  value = aws_instance.Database.private_ip
 }

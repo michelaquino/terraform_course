@@ -4,5 +4,5 @@ module "instances" {
 }
 
 output "Public_IPs" {
-    value = "${module.instances.public_ip}"
+    value = module.instances.public_ip
 }

@@ -4,9 +4,9 @@ variable "EC2_AMI" {
 }
 
 resource "aws_instance" "myec2" {
-  ami = "${var.EC2_AMI}"
+  ami = var.EC2_AMI
   instance_type = "t2.micro"
-  security_groups = ["${aws_security_group.web_traffic.name}"]
+  security_groups = [aws_security_group.web_traffic.name]
 
   tags = {
     Name = "22 - Security Group - EC2"

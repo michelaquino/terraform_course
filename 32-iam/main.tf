@@ -156,6 +156,6 @@ resource "aws_iam_policy" "customPolicy" {
 
 resource "aws_iam_policy_attachment" "policyBind" {
     name = "attachment"
-    users = ["${aws_iam_user.myUser.name}"] 
-    policy_arn = "${aws_iam_policy.customPolicy.arn}"
+    users = [aws_iam_user.myUser.name] 
+    policy_arn = aws_iam_policy.customPolicy.arn
 }

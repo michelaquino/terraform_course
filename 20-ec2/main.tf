@@ -4,6 +4,6 @@ variable "EC2_AMI" {
 }
 
 resource "aws_instance" "myec2" {
-  ami = "${var.EC2_AMI}"
+  ami = var.EC2_AMI"
   instance_type = "t2.micro"
 }
